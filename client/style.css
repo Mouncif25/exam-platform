@@ -1,4 +1,4 @@
-body {
+.body1 {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
   display: flex;
@@ -7,6 +7,15 @@ body {
   height: 1000px;
   margin: 0;
 }
+.body2 {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+}
+
 
 form {
   background-color: white;
@@ -80,14 +89,12 @@ select[name="role"]:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
 }
 
-
-.new{
+.new {
   color: #0058ff;
   margin: 11px 0px 0px 33px;
 }
 
-.to-login{
+.to-login {
   color: #0058ff;
   margin-left: 109px;
-  
 }
