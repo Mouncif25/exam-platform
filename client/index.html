@@ -47,7 +47,7 @@
           />
         </div>
 
-        <div>
+        <div style="position: relative">
           <label for="password">Password:</label>
           <input
             class="same-cls"
@@ -57,6 +57,19 @@
             required
             placeholder="Enter your password"
           />
+          <span
+            id="toggle-password"
+            style="
+              position: absolute;
+              right: -12px;
+              top: 66%;
+              transform: translateY(-50%);
+              cursor: pointer;
+              font-size: 16px;
+              color: #888;
+            "
+            >👁</span
+          >
         </div>
 
         <div>
@@ -117,12 +130,10 @@
           </select>
         </div>
 
-       
-
         <div>
           <button type="submit">Register</button>
         </div>
-        <div>
+        <div class="to-login">
           <a target="_blank" href="login.html">Login</a>
         </div>
       </fieldset>
@@ -157,6 +168,19 @@
         } catch (err) {
           alert("Server error: " + err.message);
         }
+      });
+    </script>
+    <script>
+      const togglePassword = document.getElementById("toggle-password");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", () => {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        togglePassword.textContent = type === "password" ? "👁" : "🙈";
       });
     </script>
   </body>

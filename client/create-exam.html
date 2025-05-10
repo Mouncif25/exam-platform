@@ -1,64 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Create Exam</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <form id="exam-form">
-    <h2>Create New Exam</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Exam</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="exam-form">
+      <h2>Create New Exam</h2>
 
-    <label for="title">Exam Title:</label>
-    <input class="same-cls" type="text" id="title" name="title" required><br><br>
+      <label for="title">Exam Title:</label>
+      <input
+        class="same-cls"
+        type="text"
+        id="title"
+        name="title"
+        required
+      /><br /><br />
 
-    <label for="description">Description:</label>
-    <textarea class="same-cls" id="description" name="description" rows="4" required></textarea><br><br>
+      <label for="description">Description:</label>
+      <textarea
+        class="same-cls"
+        id="description"
+        name="description"
+        rows="4"
+        required
+      ></textarea
+      ><br /><br />
 
-    <label for="audience">Target Audience:</label>
-    <input class="same-cls" type="text" id="audience" name="audience" placeholder="e.g., 2nd year MIP S4 Group A" required><br><br>
+      <label for="audience">Target Audience:</label>
+      <input
+        class="same-cls"
+        type="text"
+        id="audience"
+        name="audience"
+        placeholder="e.g., 2nd year MIP S4 Group A"
+        required
+      /><br /><br />
 
-    <button id="create-btn" type="submit">Create Exam</button>
+      <button id="create-btn" type="submit">Create Exam</button>
 
-    <p id="link-result" style="margin-top: 20px; font-weight: bold;"></p>
-  </form>
+      <p id="link-result" style="margin-top: 20px; font-weight: bold"></p>
+    </form>
 
-  <script>
-    const form = document.getElementById('exam-form');
-    const result = document.getElementById('link-result');
-    const createBtn = document.getElementById('create-btn');
+    <script>
+      const form = document.getElementById("exam-form");
+      const result = document.getElementById("link-result");
+      const createBtn = document.getElementById("create-btn");
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      result.textContent = '';
-      createBtn.disabled = true;
-      createBtn.textContent = "Creating...";
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        result.textContent = "";
+        createBtn.disabled = true;
+        createBtn.textContent = "Creating...";
 
-      const title = document.getElementById('title').value;
-      const description = document.getElementById('description').value;
-      const audience = document.getElementById('audience').value;
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const audience = document.getElementById("audience").value;
 
-      try {
-        const response = await fetch('http://localhost:3000/exams/create', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, description, audience })
-        });
+        try {
+          const response = await fetch("http://localhost:3000/exams/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, description, audience }),
+          });
 
-        const data = await response.json();
+          const data = await response.json();
 
-        if (response.ok) {
-          result.innerHTML = `✅ Exam created! Access link: <a href="${data.link}" target="_blank">${data.link}</a>`;
-        } else {
-          result.textContent = `❌ ${data.message}`;
+          if (response.ok) {
+            const examId = data.link.split("/").pop();
+            result.innerHTML = `
+              ✅ Exam created!<br/>
+              Exam ID: <strong>${examId}</strong><br/>
+              Full link: <a href="${data.link}" target="_blank">${data.link}</a>
+            `;
+          } else {
+            result.textContent = `❌ ${data.message}`;
+          }
+        } catch (err) {
+          result.textContent = "Server error: " + err.message;
+        } finally {
+          createBtn.disabled = false;
+          createBtn.textContent = "Create Exam";
         }
-      } catch (err) {
-        result.textContent = 'Server error: ' + err.message;
-      } finally {
-        createBtn.disabled = false;
-        createBtn.textContent = "Create Exam";
-      }
-    });
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>

@@ -15,21 +15,41 @@
         type="email"
         id="email"
         name="email"
+        placeholder="Enter your email"
         required
       /><br /><br />
 
       <label for="password">Password:</label><br />
-      <input
-        class="same-cls"
-        type="password"
-        id="password"
-        name="password"
-        required
-        placeholder="Enter your password"
-      /><br /><br />
+      <div style="position: relative">
+        <input
+          class="same-cls"
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="Enter your password"
+        />
+        <span
+          id="toggle-password"
+          style="
+            position: absolute;
+            right: -11px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            color: #888;
+          "
+          >👁
+        </span>
+      </div>
+
+      <br /><br />
 
       <button id="login-btn" type="submit">Login</button>
-
+      <div class="new">
+        <a href="index.html" >create content</a>
+      </div>
       <p
         id="login-error"
         style="color: red; text-align: center; margin-top: 10px"
@@ -77,6 +97,19 @@
           loginBtn.disabled = false;
           loginBtn.textContent = "Login";
         }
+      });
+    </script>
+    <script>
+      const togglePassword = document.getElementById("toggle-password");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", () => {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        togglePassword.textContent = type === "password" ? "👁" : "🙈";
       });
     </script>
   </body>

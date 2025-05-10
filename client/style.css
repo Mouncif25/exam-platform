@@ -79,3 +79,15 @@ select[name="role"]:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
 }
+
+
+.new{
+  color: #0058ff;
+  margin: 11px 0px 0px 33px;
+}
+
+.to-login{
+  color: #0058ff;
+  margin-left: 109px;
+  
+}
