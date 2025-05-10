@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Question</title>
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add Question to Exam</h1>
+
+      <form id="question-form">
+        <label for="examId">Exam ID:</label>
+        <input
+          type="text"
+          id="examId"
+          name="examId"
+          required
+          placeholder="Paste Exam ID"
+        /><br /><br />
+
+        <label for="type">Question Type:</label>
+        <select id="type" name="type" required>
+          <option value="qcm">QCM (Multiple Choice)</option>
+          <option value="direct">Direct Answer</option></select
+        ><br /><br />
+
+        <label for="text">Question Text:</label>
+        <textarea id="text" name="text" required rows="4"></textarea
+        ><br /><br />
+
+        <div id="qcm-options">
+          <label>Options:</label><br />
+          <input type="text" placeholder="Option 1" class="option" /><br />
+          <input type="text" placeholder="Option 2" class="option" /><br />
+          <input type="text" placeholder="Option 3" class="option" /><br />
+          <input
+            type="text"
+            placeholder="Option 4"
+            class="option"
+          /><br /><br />
+        </div>
+
+        <label for="answer">Correct Answer:</label>
+        <input type="text" id="answer" name="answer" required /><br /><br />
+
+        <label for="points">Points:</label>
+        <input type="number" id="points" name="points" required /><br /><br />
+
+        <label for="time">Time (seconds):</label>
+        <input type="number" id="time" name="time" required /><br /><br />
+
+        <button type="submit">Add Question</button>
+        <p id="result"></p>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("question-form");
+      const typeSelect = document.getElementById("type");
+      const qcmOptions = document.getElementById("qcm-options");
+      const result = document.getElementById("result");
+
+      // Show/hide QCM options
+      typeSelect.addEventListener("change", () => {
+        qcmOptions.style.display =
+          typeSelect.value === "qcm" ? "block" : "none";
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        result.textContent = "";
+
+        const examId = form.examId.value;
+        const type = form.type.value;
+        const text = form.text.value;
+        const answer = form.answer.value;
+        const points = form.points.value;
+        const time = form.time.value;
+
+        const question = {
+          type,
+          text,
+          answer,
+          points,
+          time,
+        };
+
+        if (type === "qcm") {
+          const options = [...document.querySelectorAll(".option")]
+            .map((opt) => opt.value.trim())
+            .filter((opt) => opt);
+          question.options = options;
+        }
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/exams/${examId}/questions`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(question),
+            }
+          );
+
+          const data = await response.json();
+
+          if (response.ok) {
+            result.textContent = "✅ Question added successfully";
+            form.reset();
+          } else {
+            result.textContent = "❌ " + data.message;
+          }
+        } catch (err) {
+          result.textContent = "❌ Server error: " + err.message;
+        }
+      });
+    </script>
+  </body>
+</html>

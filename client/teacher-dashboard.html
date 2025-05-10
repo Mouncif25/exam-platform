@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="style1.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="teacher-dashboard.html">🏠 Dashboard</a> |
+      <a href="create-exam.html">📝 Create Exam</a> |
+      <a href="add-question.html">➕ Add Question</a> |
+      <a href="view-questions.html">📋 View Questions</a> |
+      <a href="login.html">🔓 Logout</a>
+    </nav>
+    
+    <div>
+      <h1>👩‍🏫 Teacher Dashboard</h1>
+      <br />
+    </div>
+
+    <form id="exam-form">
+      <h2>Create New Exam</h2>
+
+      <label for="title">Exam Title:</label><br />
+      <input
+        class="same-cls"
+        type="text"
+        id="title"
+        name="title"
+        required
+      /><br /><br />
+
+      <label for="description">Description:</label><br />
+      <textarea
+        class="same-cls"
+        id="description"
+        name="description"
+        rows="4"
+        required
+      ></textarea
+      ><br /><br />
+
+      <label for="audience">Target Audience:</label><br />
+      <input
+        class="same-cls"
+        type="text"
+        id="audience"
+        name="audience"
+        required
+      /><br /><br>
+ 
+      
+
+
+      <button type="submit" id="create-btn">Create Exam</button>
+      <p id="result" style="margin-top: 15px; font-weight: bold"></p>
+    </form>
+
+    <script>
+      const form = document.getElementById("exam-form");
+      const result = document.getElementById("result");
+      const createBtn = document.getElementById("create-btn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        result.textContent = "";
+        createBtn.disabled = true;
+        createBtn.textContent = "Creating...";
+
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const audience = document.getElementById("audience").value;
+
+        try {
+          const response = await fetch("http://localhost:3000/exams/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, description, audience }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            result.innerHTML = `✅ Exam created! Access link: <a href="${data.link}" target="_blank">${data.link}</a>`;
+          } else {
+            result.textContent = "❌ " + data.message;
+          }
+        } catch (err) {
+          result.textContent = "Server error: " + err.message;
+        } finally {
+          createBtn.disabled = false;
+          createBtn.textContent = "Create Exam";
+        }
+      });
+    </script>
+  </body>
+</html>

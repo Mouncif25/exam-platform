@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style4.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- ✅ Optional top nav (simple version) -->
+      <nav>
+        <a href="student-dashboard.html">🏠 Home</a> |
+        <a href="take-exam.html">📝 Take Exam</a> |
+        <a href="login.html">🔓 Logout</a>
+      </nav>
+
+      <h1>🎓 Student Dashboard</h1>
+
+      <p>Welcome! Enter your exam ID below to begin:</p>
+
+      <form id="exam-form">
+        <label for="examId">Exam ID:</label>
+        <input type="text" id="examId" required />
+        <button type="submit">Start Exam</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("exam-form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const examId = document.getElementById("examId").value.trim();
+
+        if (examId) {
+          // Redirect to take-exam page with examId in URL
+          window.location.href = `take-exam.html?examId=${examId}`;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,76 +1,163 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Form</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="register-form">
+      <fieldset>
+        <legend>Registration Form</legend>
 
-  <form action="" method="post">
-    <fieldset>
-      <legend>Registration Form</legend>
-      
-      <div>
-        <label for="fname">First Name:</label>
-        <input class="same-cls" type="text" id="fname" name="fname" required placeholder="Enter your first name">
-      </div>
+        <div>
+          <label for="fname">First Name:</label>
+          <input
+            class="same-cls"
+            type="text"
+            id="fname"
+            name="fname"
+            required
+            placeholder="Enter your first name"
+          />
+        </div>
 
-      <div>
-        <label for="lname">Last Name:</label>
-        <input class="same-cls" type="text" id="lname" name="lname" required placeholder="Enter your last name">
-      </div>
+        <div>
+          <label for="lname">Last Name:</label>
+          <input
+            class="same-cls"
+            type="text"
+            id="lname"
+            name="lname"
+            required
+            placeholder="Enter your last name"
+          />
+        </div>
 
-      <div>
-        <label for="email">Email:</label>
-        <input class="same-cls" type="email" id="email" name="email" required placeholder="Enter your email">
-      </div>
+        <div>
+          <label for="email">Email:</label>
+          <input
+            class="same-cls"
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+          />
+        </div>
 
-      <div>
-        <label for="dob">Date of Birth:</label>
-        <input class="same-cls" type="date" id="dob" name="dob" required>
-      </div>
+        <div>
+          <label for="password">Password:</label>
+          <input
+            class="same-cls"
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Enter your password"
+          />
+        </div>
 
-      <div>
-        <label for="gender">Gender:</label>  
+        <div>
+          <label for="dob">Date of Birth:</label>
+          <input class="same-cls" type="date" id="dob" name="dob" required />
+        </div>
 
-        <br>
-        <p>
-          <input class="choice-icon" type="radio" id="male" name="gender" value="male"> 
-          <label for="male" class="font">Male</label>
-        </p> 
-  
-        <p>
-          <input type="radio" id="female" name="gender" value="female"> 
-          <label for="female" class="font">Female</label>
-        </p>
+        <div>
+          <label for="gender">Gender:</label>
 
-      </div>
+          <br />
+          <p>
+            <input
+              class="choice-icon"
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+            />
+            <label for="male" class="font">Male</label>
+          </p>
 
-      <div>
-        <label for="institution">Institution:</label>
-        <input class="same-cls" type="text" id="institution" name="institution" required placeholder="Your institution name">
-      </div>
+          <p>
+            <input type="radio" id="female" name="gender" value="female" />
+            <label for="female" class="font">Female</label>
+          </p>
+        </div>
 
-      <div>
-        <label for="sector">Sector:</label>
-        <select id="sector" name="sector" required>
-          <option value="web developer">Web Developer</option>
-          <option value="app developer">App Developer</option>
-          <option value="cybersecurity">Cybersecurity</option>
-          <option value="game developer">Game Developer</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+        <div>
+          <label for="institution">Institution:</label>
+          <input
+            class="same-cls"
+            type="text"
+            id="institution"
+            name="institution"
+            required
+            placeholder="Your institution name"
+          />
+        </div>
 
-      <div>
-        <button type="submit">Register</button>
-      </div>
-      
-    </fieldset>
-  </form>
+        <div>
+          <label for="major">Major:</label>
+          <input
+            class="same-cls"
+            type="text"
+            id="major"
+            name="major"
+            placeholder="Major"
+            required
+          />
+        </div>
+        <div>
+          <label for="role">User Type:</label>
+          <select id="role" name="role" required>
+            <option value="">Select User Type</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
 
-</body>
+       
+
+        <div>
+          <button type="submit">Register</button>
+        </div>
+        <div>
+          <a target="_blank" href="login.html">Login</a>
+        </div>
+      </fieldset>
+    </form>
+    <script>
+      const form = document.getElementById("register-form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = {
+          fname: form.fname.value,
+          lname: form.lname.value,
+          email: form.email.value,
+          dob: form.dob.value,
+          gender: form.gender.value,
+          institution: form.institution.value,
+          major: form.major.value,
+          role: form.role.value,
+          password: form.password.value,
+        };
+
+        try {
+          const response = await fetch("http://localhost:3000/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+          alert(result.message);
+        } catch (err) {
+          alert("Server error: " + err.message);
+        }
+      });
+    </script>
+  </body>
 </html>

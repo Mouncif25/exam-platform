@@ -1,0 +1,92 @@
+/* General layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+/* Container centers the content and separates h1 from form */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Page title */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* Form styling */
+form {
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+/* Question list */
+#question-list {
+  margin-top: 20px;
+}
+
+#question-list > div {
+  background-color: #fff;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #4caf50;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#question-list strong {
+  color: #222;
+}
+
+#question-list em {
+  font-style: italic;
+  color: #555;
+}
+
+#question-list ul {
+  margin-top: 5px;
+  margin-left: 20px;
+}

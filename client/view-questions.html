@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>View Questions</title>
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📋 View Exam Questions</h1>
+
+      <form id="load-form">
+        <label for="examId">Enter Exam ID:</label>
+        <input type="text" id="examId" required />
+        <button type="submit">Load Questions</button>
+      </form>
+
+      <div id="question-list" style="margin-top: 20px"></div>
+    </div>
+
+    <script>
+      const form = document.getElementById("load-form");
+      const list = document.getElementById("question-list");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        list.innerHTML = "";
+
+        const examId = document.getElementById("examId").value;
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/exams/${examId}/questions`
+          );
+          const data = await res.json();
+
+          if (!Array.isArray(data)) {
+            list.innerHTML = `<p style="color:red;">❌ ${data.message}</p>`;
+            return;
+          }
+
+          if (data.length === 0) {
+            list.innerHTML = "<p>No questions found for this exam.</p>";
+            return;
+          }
+
+          data.forEach((q, index) => {
+            const item = document.createElement("div");
+            item.style.border = "1px solid #ccc";
+            item.style.padding = "15px";
+            item.style.marginBottom = "10px";
+            item.style.borderRadius = "8px";
+            item.innerHTML = `
+            <strong>Q${index + 1} (${q.type.toUpperCase()}):</strong> ${
+              q.text
+            }<br/>
+            ${
+              q.options?.length
+                ? `<em>Options:</em> <ul>${q.options
+                    .map((opt) => `<li>${opt}</li>`)
+                    .join("")}</ul>`
+                : ""
+            }
+            <strong>Answer:</strong> ${q.answer}<br/>
+            <strong>Points:</strong> ${q.points}, <strong>Time:</strong> ${
+              q.time
+            }s
+          `;
+            list.appendChild(item);
+          });
+        } catch (err) {
+          list.innerHTML = `<p style="color:red;">❌ Server error: ${err.message}</p>`;
+        }
+      });
+    </script>
+  </body>
+</html>

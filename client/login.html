@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css"> <!-- if you have CSS -->
-</head>
-<body>
-  <form action="#" method="POST">
-    <h2>Login</h2>
-    <label for="email">Email:</label><br>
-    <input class="same-cls" type="email" id="email" name="email" required><br><br>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form action="javascript:void(0)" method="POST">
+      <h2>Login</h2>
 
-    <label for="password">Password:</label><br>
-    <input class="same-cls" type="password" id="password" name="password" required><br><br>
+      <label for="email">Email:</label><br />
+      <input
+        class="same-cls"
+        type="email"
+        id="email"
+        name="email"
+        required
+      /><br /><br />
 
-    <button type="submit">Login</button>
-  </form>
-</body>
+      <label for="password">Password:</label><br />
+      <input
+        class="same-cls"
+        type="password"
+        id="password"
+        name="password"
+        required
+        placeholder="Enter your password"
+      /><br /><br />
+
+      <button id="login-btn" type="submit">Login</button>
+
+      <p
+        id="login-error"
+        style="color: red; text-align: center; margin-top: 10px"
+      ></p>
+    </form>
+
+    <script>
+      const form = document.querySelector("form");
+      const loginBtn = document.getElementById("login-btn");
+      const errorMsg = document.getElementById("login-error");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorMsg.textContent = "";
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          const response = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message);
+            if (result.role === "teacher") {
+              window.location.href = "teacher-dashboard.html";
+            } else if (result.role === "student") {
+              window.location.href = "student-dashboard.html";
+            } else {
+              errorMsg.textContent = "❌ Unknown user role";
+            }
+          } else {
+            errorMsg.textContent = result.message;
+          }
+        } catch (error) {
+          errorMsg.textContent = "Server error: " + error.message;
+        } finally {
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Login";
+        }
+      });
+    </script>
+  </body>
 </html>
