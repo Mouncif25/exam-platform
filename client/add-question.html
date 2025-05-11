@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Add Question</title>
+    <title>Ajouter une Question</title>
     <link rel="stylesheet" href="style2.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Add Question to Exam</h1>
+      <h1>Ajouter une Question à l'Examen</h1>
 
       <form id="question-form">
-        <label for="examId">Exam ID:</label>
+        <label for="examId">ID de l'Examen :</label>
         <input
           type="text"
           id="examId"
           name="examId"
           required
-          placeholder="Paste Exam ID"
+          placeholder="Collez l'ID de l'examen"
         /><br /><br />
 
-        <label for="type">Question Type:</label>
+        <label for="type">Type de la Question :</label>
         <select id="type" name="type" required>
-          <option value="qcm">QCM (Multiple Choice)</option>
-          <option value="direct">Direct Answer</option></select
+          <option value="qcm">QCM (Choix Multiple)</option>
+          <option value="direct">Réponse Directe</option></select
         ><br /><br />
 
-        <label for="text">Question Text:</label>
+        <label for="text">Texte de la Question :</label>
         <textarea id="text" name="text" required rows="4"></textarea
         ><br /><br />
 
         <div id="qcm-options">
-          <label>Options:</label><br />
+          <label>Options :</label><br />
           <input type="text" placeholder="Option 1" class="option" /><br />
           <input type="text" placeholder="Option 2" class="option" /><br />
           <input type="text" placeholder="Option 3" class="option" /><br />
@@ -41,16 +41,16 @@
           /><br /><br />
         </div>
 
-        <label for="answer">Correct Answer:</label>
+        <label for="answer">Réponse Correcte :</label>
         <input type="text" id="answer" name="answer" required /><br /><br />
 
-        <label for="points">Points:</label>
+        <label for="points">Points :</label>
         <input type="number" id="points" name="points" required /><br /><br />
 
-        <label for="time">Time (seconds):</label>
+        <label for="time">Temps (secondes) :</label>
         <input type="number" id="time" name="time" required /><br /><br />
 
-        <button type="submit">Add Question</button>
+        <button type="submit">Ajouter la Question</button>
         <p id="result"></p>
       </form>
     </div>
@@ -61,7 +61,7 @@
       const qcmOptions = document.getElementById("qcm-options");
       const result = document.getElementById("result");
 
-      // Show/hide QCM options
+      // Afficher/masquer les options QCM
       typeSelect.addEventListener("change", () => {
         qcmOptions.style.display =
           typeSelect.value === "qcm" ? "block" : "none";
@@ -106,13 +106,13 @@
           const data = await response.json();
 
           if (response.ok) {
-            result.textContent = "✅ Question added successfully";
+            result.textContent = "✅ Question ajoutée avec succès";
             form.reset();
           } else {
             result.textContent = "❌ " + data.message;
           }
         } catch (err) {
-          result.textContent = "❌ Server error: " + err.message;
+          result.textContent = "❌ Erreur serveur : " + err.message;
         }
       });
     </script>

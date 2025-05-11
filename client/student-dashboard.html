@@ -1,27 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Student Dashboard</title>
+    <title>Tableau de bord étudiant</title>
     <link rel="stylesheet" href="style4.css" />
   </head>
   <body>
     <div class="container">
-      <!-- ✅ Optional top nav (simple version) -->
+      <!-- ✅ Barre de navigation (version simple) -->
       <nav>
-        <a href="student-dashboard.html">🏠 Home</a> |
-        <a href="take-exam.html">📝 Take Exam</a> |
-        <a href="login.html">🔓 Logout</a>
+        <a href="student-dashboard.html">🏠 Accueil</a> |
+        <a href="take-exam.html">📝 Passer un examen</a> |
+        <a href="login.html">🔓 Déconnexion</a>
       </nav>
 
-      <h1>🎓 Student Dashboard</h1>
+      <h1>🎓 Tableau de bord de l'étudiant</h1>
 
-      <p>Welcome! Enter your exam ID below to begin:</p>
+      <p>
+        Bienvenue ! Entrez l'identifiant de l'examen ci-dessous pour commencer :
+      </p>
 
       <form id="exam-form">
-        <label for="examId">Exam ID:</label>
+        <label for="examId">ID de l'examen :</label>
         <input type="text" id="examId" required />
-        <button type="submit">Start Exam</button>
+        <button type="submit">Commencer l'examen</button>
       </form>
     </div>
 
@@ -33,7 +35,7 @@
         const examId = document.getElementById("examId").value.trim();
 
         if (examId) {
-          // Redirect to take-exam page with examId in URL
+          // Rediriger vers la page take-exam avec examId dans l'URL
           window.location.href = `take-exam.html?examId=${examId}`;
         }
       });

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Take Exam</title>
+    <title>Passer l'examen</title>
     <link rel="stylesheet" href="style3.css" />
   </head>
   <body>
     <div class="container">
-      <h1>🎓 Take Exam</h1>
+      <h1>🎓 Passer l'examen</h1>
 
       <form id="exam-loader">
-        <label for="examId">Enter Exam ID:</label>
+        <label for="examId">Entrez l'ID de l'examen :</label>
         <input type="text" id="examId" required />
-        <button type="submit">Start Exam</button>
+        <button type="submit">Commencer l'examen</button>
       </form>
 
       <div id="exam-area" style="display: none">
@@ -22,11 +22,11 @@
         <input
           type="text"
           id="student-answer"
-          placeholder="Type your answer"
+          placeholder="Écrivez votre réponse"
           style="display: none; width: 100%; padding: 8px"
         />
 
-        <button id="next-btn">Next</button>
+        <button id="next-btn">Suivant</button>
       </div>
 
       <div id="result" style="margin-top: 20px; font-weight: bold"></div>
@@ -59,7 +59,7 @@
           questions = await res.json();
 
           if (!Array.isArray(questions) || questions.length === 0) {
-            result.textContent = "❌ No questions found for this exam.";
+            result.textContent = "❌ Aucune question trouvée pour cet examen.";
             return;
           }
 
@@ -67,7 +67,8 @@
           examArea.style.display = "block";
           showQuestion();
         } catch (err) {
-          result.textContent = "❌ Error loading exam: " + err.message;
+          result.textContent =
+            "❌ Erreur lors du chargement de l'examen : " + err.message;
         }
       });
 
@@ -79,14 +80,13 @@
           const selected = document.querySelector(
             'input[name="qcm-option"]:checked'
           );
-          if (!selected) return alert("Please select an answer");
+          if (!selected) return alert("Veuillez sélectionner une réponse");
           studentAnswer = selected.value;
         } else {
           studentAnswer = studentAnswerInput.value.trim();
-          if (!studentAnswer) return alert("Please type your answer");
+          if (!studentAnswer) return alert("Veuillez écrire votre réponse");
         }
 
-        // ✅ Check answer
         if (studentAnswer.toLowerCase() === currentQ.answer.toLowerCase()) {
           score += Number(currentQ.points);
         }
@@ -96,7 +96,7 @@
           showQuestion();
         } else {
           examArea.style.display = "none";
-          result.textContent = `✅ Exam complete! Your score: ${score} / ${questions.reduce(
+          result.textContent = `✅ Examen terminé ! Votre score : ${score} / ${questions.reduce(
             (a, q) => a + q.points,
             0
           )}`;
@@ -105,7 +105,7 @@
 
       function showQuestion() {
         const q = questions[currentIndex];
-        questionNumber.textContent = `Question ${currentIndex + 1} of ${
+        questionNumber.textContent = `Question ${currentIndex + 1} sur ${
           questions.length
         }`;
         questionText.textContent = q.text;

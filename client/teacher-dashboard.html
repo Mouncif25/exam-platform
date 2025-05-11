@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Teacher Dashboard</title>
+    <title>Tableau de bord enseignant</title>
     <link rel="stylesheet" href="style1.css" />
   </head>
   <body>
     <nav>
-      <a href="teacher-dashboard.html">🏠 Dashboard</a> |
-      <a href="create-exam.html">📝 Create Exam</a> |
-      <a href="add-question.html">➕ Add Question</a> |
-      <a href="view-questions.html">📋 View Questions</a> |
-      <a href="login.html">🔓 Logout</a>
+      <a href="teacher-dashboard.html">🏠 Tableau de bord</a> |
+      <a href="create-exam.html">📝 Créer un examen</a> |
+      <a href="add-question.html">➕ Ajouter une question</a> |
+      <a href="view-questions.html">📋 Voir les questions</a> |
+      <a href="login.html">🔓 Déconnexion</a>
     </nav>
-    
+
     <div>
-      <h1>👩‍🏫 Teacher Dashboard</h1>
+      <h1>👩‍🏫 Tableau de bord de l'enseignant</h1>
       <br />
     </div>
 
     <form id="exam-form">
-      <h2>Create New Exam</h2>
+      <h2>Créer un nouvel examen</h2>
 
-      <label for="title">Exam Title:</label><br />
+      <label for="title">Titre de l'examen :</label><br />
       <input
         class="same-cls"
         type="text"
@@ -31,7 +31,7 @@
         required
       /><br /><br />
 
-      <label for="description">Description:</label><br />
+      <label for="description">Description :</label><br />
       <textarea
         class="same-cls"
         id="description"
@@ -41,19 +41,16 @@
       ></textarea
       ><br /><br />
 
-      <label for="audience">Target Audience:</label><br />
+      <label for="audience">Public cible :</label><br />
       <input
         class="same-cls"
         type="text"
         id="audience"
         name="audience"
         required
-      /><br /><br>
- 
-      
+      /><br /><br />
 
-
-      <button type="submit" id="create-btn">Create Exam</button>
+      <button type="submit" id="create-btn">Créer l'examen</button>
       <p id="result" style="margin-top: 15px; font-weight: bold"></p>
     </form>
 
@@ -66,7 +63,7 @@
         e.preventDefault();
         result.textContent = "";
         createBtn.disabled = true;
-        createBtn.textContent = "Creating...";
+        createBtn.textContent = "Création...";
 
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
@@ -82,15 +79,15 @@
           const data = await response.json();
 
           if (response.ok) {
-            result.innerHTML = `✅ Exam created! Access link: <a href="${data.link}" target="_blank">${data.link}</a>`;
+            result.innerHTML = `✅ Examen créé ! Lien d'accès : <a href="${data.link}" target="_blank">${data.link}</a>`;
           } else {
             result.textContent = "❌ " + data.message;
           }
         } catch (err) {
-          result.textContent = "Server error: " + err.message;
+          result.textContent = "Erreur serveur : " + err.message;
         } finally {
           createBtn.disabled = false;
-          createBtn.textContent = "Create Exam";
+          createBtn.textContent = "Créer un examen";
         }
       });
     </script>

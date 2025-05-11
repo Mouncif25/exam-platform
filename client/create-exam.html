@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Create Exam</title>
+    <title>Créer un Examen</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="body2">
     <form id="exam-form">
-      <h2>Create New Exam</h2>
+      <h2>Créer un nouvel examen</h2>
 
-      <label for="title">Exam Title:</label>
+      <label for="title">Titre de l'examen :</label>
       <input
         class="same-cls"
         type="text"
@@ -18,7 +18,7 @@
         required
       /><br /><br />
 
-      <label for="description">Description:</label>
+      <label for="description">Description :</label>
       <textarea
         class="same-cls"
         id="description"
@@ -28,17 +28,17 @@
       ></textarea
       ><br /><br />
 
-      <label for="audience">Target Audience:</label>
+      <label for="audience">Public cible :</label>
       <input
         class="same-cls"
         type="text"
         id="audience"
         name="audience"
-        placeholder="e.g., 2nd year MIP S4 Group A"
+        placeholder="ex. : 2ème année MIP S4 Groupe A"
         required
       /><br /><br />
 
-      <button id="create-btn" type="submit">Create Exam</button>
+      <button id="create-btn" type="submit">Créer l'examen</button>
 
       <p id="link-result" style="margin-top: 20px; font-weight: bold"></p>
     </form>
@@ -52,7 +52,7 @@
         e.preventDefault();
         result.textContent = "";
         createBtn.disabled = true;
-        createBtn.textContent = "Creating...";
+        createBtn.textContent = "Création...";
 
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
@@ -70,18 +70,18 @@
           if (response.ok) {
             const examId = data.link.split("/").pop();
             result.innerHTML = `
-              ✅ Exam created!<br/>
-              Exam ID: <strong>${examId}</strong><br/>
-              Full link: <a href="${data.link}" target="_blank">${data.link}</a>
+              ✅ Examen créé avec succès !<br/>
+              ID de l'examen : <strong>${examId}</strong><br/>
+              Lien : <a href="${data.link}" target="_blank">${data.link}</a>
             `;
           } else {
             result.textContent = `❌ ${data.message}`;
           }
         } catch (err) {
-          result.textContent = "Server error: " + err.message;
+          result.textContent = "Erreur serveur : " + err.message;
         } finally {
           createBtn.disabled = false;
-          createBtn.textContent = "Create Exam";
+          createBtn.textContent = "Créer l'examen";
         }
       });
     </script>

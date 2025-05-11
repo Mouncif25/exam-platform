@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Login</title>
+    <title>Connexion</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="body2">
     <form action="javascript:void(0)" method="POST">
-      <h2>Login</h2>
+      <h2>Connexion</h2>
 
-      <label for="email">Email:</label><br />
+      <label for="email">E-mail :</label><br />
       <input
         class="same-cls"
         type="email"
         id="email"
         name="email"
-        placeholder="Enter your email"
+        placeholder="Entrez votre e-mail"
         required
       /><br /><br />
 
-      <label for="password">Password:</label><br />
+      <label for="password">Mot de passe :</label><br />
       <div style="position: relative">
         <input
           class="same-cls"
@@ -27,7 +27,7 @@
           id="password"
           name="password"
           required
-          placeholder="Enter your password"
+          placeholder="Entrez votre mot de passe"
         />
         <span
           id="toggle-password"
@@ -40,15 +40,15 @@
             font-size: 16px;
             color: #888;
           "
-          >👁
+          >👁️‍🗨️
         </span>
       </div>
 
       <br /><br />
 
-      <button id="login-btn" type="submit">Login</button>
+      <button id="login-btn" type="submit">Se connecter</button>
       <div class="new">
-        <a href="index.html" >create content</a>
+        <a href="index.html">Créer un compte</a>
       </div>
       <p
         id="login-error"
@@ -65,7 +65,7 @@
         e.preventDefault();
         errorMsg.textContent = "";
         loginBtn.disabled = true;
-        loginBtn.textContent = "Logging in...";
+        loginBtn.textContent = "Connexion en cours...";
 
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
@@ -80,25 +80,26 @@
           const result = await response.json();
 
           if (response.ok) {
-            alert(result.message);
+            alert(result.message); // ✅ This should also be in French from the server if possible
             if (result.role === "teacher") {
               window.location.href = "teacher-dashboard.html";
             } else if (result.role === "student") {
               window.location.href = "student-dashboard.html";
             } else {
-              errorMsg.textContent = "❌ Unknown user role";
+              errorMsg.textContent = "❌ Rôle d'utilisateur inconnu.";
             }
           } else {
             errorMsg.textContent = result.message;
           }
         } catch (error) {
-          errorMsg.textContent = "Server error: " + error.message;
+          errorMsg.textContent = "Erreur du serveur : " + error.message;
         } finally {
           loginBtn.disabled = false;
-          loginBtn.textContent = "Login";
+          loginBtn.textContent = "Se connecter";
         }
       });
     </script>
+
     <script>
       const togglePassword = document.getElementById("toggle-password");
       const passwordInput = document.getElementById("password");
@@ -109,7 +110,7 @@
             ? "text"
             : "password";
         passwordInput.setAttribute("type", type);
-        togglePassword.textContent = type === "password" ? "👁" : "🙈";
+        togglePassword.textContent = type === "password" ? "👁️‍🗨️" : "🙈";
       });
     </script>
   </body>

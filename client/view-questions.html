@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>View Questions</title>
+    <title>Voir les questions</title>
     <link rel="stylesheet" href="style3.css" />
   </head>
   <body>
     <div class="container">
-      <h1>📋 View Exam Questions</h1>
+      <h1>📋 Voir les questions de l'examen</h1>
 
       <form id="load-form">
-        <label for="examId">Enter Exam ID:</label>
+        <label for="examId">Entrez l'identifiant de l'examen :</label>
         <input type="text" id="examId" required />
-        <button type="submit">Load Questions</button>
+        <button type="submit">Charger les questions</button>
       </form>
 
       <div id="question-list" style="margin-top: 20px"></div>
@@ -40,7 +40,7 @@
           }
 
           if (data.length === 0) {
-            list.innerHTML = "<p>No questions found for this exam.</p>";
+            list.innerHTML = "<p>Aucune question trouvée pour cet examen.</p>";
             return;
           }
 
@@ -56,20 +56,20 @@
             }<br/>
             ${
               q.options?.length
-                ? `<em>Options:</em> <ul>${q.options
+                ? `<em>Options :</em> <ul>${q.options
                     .map((opt) => `<li>${opt}</li>`)
                     .join("")}</ul>`
                 : ""
             }
-            <strong>Answer:</strong> ${q.answer}<br/>
-            <strong>Points:</strong> ${q.points}, <strong>Time:</strong> ${
+            <strong>Réponse :</strong> ${q.answer}<br/>
+            <strong>Points :</strong> ${q.points}, <strong>Temps :</strong> ${
               q.time
             }s
           `;
             list.appendChild(item);
           });
         } catch (err) {
-          list.innerHTML = `<p style="color:red;">❌ Server error: ${err.message}</p>`;
+          list.innerHTML = `<p style="color:red;">❌ Erreur serveur : ${err.message}</p>`;
         }
       });
     </script>

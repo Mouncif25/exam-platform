@@ -1,61 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registration Form</title>
+    <title>Formulaire d'inscription</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="body1">
     <form id="register-form">
       <fieldset>
-        <legend>Registration Form</legend>
+        <legend>Formulaire d'inscription</legend>
 
         <div>
-          <label for="fname">First Name:</label>
+          <label for="fname">Prénom :</label>
           <input
             class="same-cls"
             type="text"
             id="fname"
             name="fname"
             required
-            placeholder="Enter your first name"
+            placeholder="Entrez votre prénom"
           />
         </div>
 
         <div>
-          <label for="lname">Last Name:</label>
+          <label for="lname">Nom :</label>
           <input
             class="same-cls"
             type="text"
             id="lname"
             name="lname"
             required
-            placeholder="Enter your last name"
+            placeholder="Entrez votre nom"
           />
         </div>
 
         <div>
-          <label for="email">Email:</label>
+          <label for="email">E-mail :</label>
           <input
             class="same-cls"
             type="email"
             id="email"
             name="email"
             required
-            placeholder="Enter your email"
+            placeholder="Entrez votre e-mail"
           />
         </div>
 
         <div style="position: relative">
-          <label for="password">Password:</label>
+          <label for="password">Mot de passe :</label>
           <input
             class="same-cls"
             type="password"
             id="password"
             name="password"
             required
-            placeholder="Enter your password"
+            placeholder="Entrez votre mot de passe"
           />
           <span
             id="toggle-password"
@@ -68,17 +68,17 @@
               font-size: 16px;
               color: #888;
             "
-            >👁</span
+            >👁️‍🗨️</span
           >
         </div>
 
         <div>
-          <label for="dob">Date of Birth:</label>
+          <label for="dob">Date de naissance :</label>
           <input class="same-cls" type="date" id="dob" name="dob" required />
         </div>
 
         <div>
-          <label for="gender">Gender:</label>
+          <label for="gender">Genre :</label>
 
           <br />
           <p>
@@ -89,55 +89,56 @@
               name="gender"
               value="male"
             />
-            <label for="male" class="font">Male</label>
+            <label for="male" class="font">Homme</label>
           </p>
 
           <p>
             <input type="radio" id="female" name="gender" value="female" />
-            <label for="female" class="font">Female</label>
+            <label for="female" class="font">Femme</label>
           </p>
         </div>
 
         <div>
-          <label for="institution">Institution:</label>
+          <label for="institution">Établissement :</label>
           <input
             class="same-cls"
             type="text"
             id="institution"
             name="institution"
             required
-            placeholder="Your institution name"
+            placeholder="Nom de votre établissement"
           />
         </div>
 
         <div>
-          <label for="major">Major:</label>
+          <label for="major">Spécialité :</label>
           <input
             class="same-cls"
             type="text"
             id="major"
             name="major"
-            placeholder="Major"
+            placeholder="Spécialité"
             required
           />
         </div>
         <div>
-          <label for="role">User Type:</label>
+          <label for="role">Type d'utilisateur :</label>
           <select id="role" name="role" required>
-            <option value="">Select User Type</option>
-            <option value="student">Student</option>
-            <option value="teacher">Teacher</option>
+            <option value="">Sélectionnez un type</option>
+            <option value="student">Étudiant</option>
+            <option value="teacher">Enseignant</option>
           </select>
         </div>
 
         <div>
-          <button type="submit">Register</button>
+          <button type="submit">S'inscrire</button>
         </div>
         <div class="to-login">
-          <a target="_blank" href="login.html">Login</a>
+          <a target="_blank" href="login.html">Se connecter</a>
         </div>
       </fieldset>
     </form>
+
     <script>
       const form = document.getElementById("register-form");
 
@@ -164,12 +165,13 @@
           });
 
           const result = await response.json();
-          alert(result.message);
+          alert(result.message); // ✅ Ce message sera renvoyé par le serveur (vous pouvez aussi le traduire côté backend)
         } catch (err) {
-          alert("Server error: " + err.message);
+          alert("Erreur du serveur : " + err.message);
         }
       });
     </script>
+
     <script>
       const togglePassword = document.getElementById("toggle-password");
       const passwordInput = document.getElementById("password");
@@ -180,7 +182,7 @@
             ? "text"
             : "password";
         passwordInput.setAttribute("type", type);
-        togglePassword.textContent = type === "password" ? "👁" : "🙈";
+        togglePassword.textContent = type === "password" ? "👁️‍🗨️" : "🙈";
       });
     </script>
   </body>
