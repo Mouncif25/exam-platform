@@ -8,7 +8,6 @@
   <body>
     <nav>
       <a href="teacher-dashboard.html">🏠 Tableau de bord</a> |
-      <a href="create-exam.html">📝 Créer un examen</a> |
       <a href="add-question.html">➕ Ajouter une question</a> |
       <a href="view-questions.html">📋 Voir les questions</a> |
       <a href="login.html">🔓 Déconnexion</a>
@@ -20,7 +19,7 @@
     </div>
 
     <form id="exam-form">
-      <h2>Créer un nouvel examen</h2>
+      <h2>📝 Créer un nouvel examen</h2>
 
       <label for="title">Titre de l'examen :</label><br />
       <input
@@ -79,7 +78,12 @@
           const data = await response.json();
 
           if (response.ok) {
-            result.innerHTML = `✅ Examen créé ! Lien d'accès : <a href="${data.link}" target="_blank">${data.link}</a>`;
+            const examId = data.link.split("/").pop();
+            result.innerHTML = `
+              ✅ Examen créé avec succès !<br/>
+              ID de l'examen : <strong>${examId}</strong><br/>
+              
+            `;
           } else {
             result.textContent = "❌ " + data.message;
           }
